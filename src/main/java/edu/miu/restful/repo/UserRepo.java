@@ -12,5 +12,5 @@ import java.util.List;
 public interface UserRepo extends CrudRepository<Users, Long> {
 
     @Query("SELECT u FROM Users u WHERE u.posts.size>1 ")
-    List<UserDto> greaterThanMoreOnePost();
+    List<Users> findGreaterThanEqual(int postNum);
 }

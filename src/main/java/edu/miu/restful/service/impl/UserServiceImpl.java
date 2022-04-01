@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findUserHaveMoreOnePosts() {
-        return userRepo.greaterThanMoreOnePost();
+    public List<Users> findUserHaveMoreOnePosts() {
+        return userRepo.findGreaterThanEqual(1);
     }
 }

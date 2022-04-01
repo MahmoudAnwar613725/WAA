@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/moreone")
-    public List<UserDto> getUsersHaveMoreOnePost(){
+    public List<Users> getUsersHaveMoreOnePost(){
         return userService.findUserHaveMoreOnePosts();
     }
 

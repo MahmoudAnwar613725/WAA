@@ -14,5 +14,5 @@ public interface UserService {
     void save(Users user);
     void delete(long id);
     void update(int id, UserDto p);
-    List<UserDto> findUserHaveMoreOnePosts();
+    List<Users> findUserHaveMoreOnePosts();
 }
