@@ -6,6 +6,7 @@ import edu.miu.restful.entity.dto.PostDto;
 import edu.miu.restful.entity.dto.UserDto;
 import edu.miu.restful.helper.ListMapper;
 import edu.miu.restful.repo.UserRepo;
+import edu.miu.restful.service.PostService;
 import edu.miu.restful.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    PostService postService;
 
     @Autowired
     ModelMapper modelMapper;
@@ -38,9 +42,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Users getUserAllDataById(long id) {
+        return userRepo.findById(id).orElse(null);
+    }
+
+    @Override
     public List<PostDto> getPostsOfUserById(long id) {
         return (List<PostDto>) listMapperPost2Dto.mapList(userRepo.findById(id).get().getPosts(), new PostDto());
     }
+
+
 
     @Override
     public void save(Users user) {
@@ -58,7 +69,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Users> findUserHaveMoreOnePosts() {
-        return userRepo.findGreaterThanEqual(1);
+    public List<Users> findUserHaveMoreNPosts(int postNum) {
+        return userRepo.findGreaterThanNpost(postNum);
     }
+
+    @Override
+    public List<UserDto> findUserByPostTitle(String title) {
+        return (List<UserDto>) listMapperUser2Dto.mapList(userRepo.findUserByPostTitle(title), new UserDto());
+    }
+
+    @Override
+    public PostDto getPostByIdByUserId(int postId) {
+        return postService.getById(postId);
+    }
+
 }

@@ -1,5 +1,7 @@
 package edu.miu.restful.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,7 @@ public class Users {
     long id;
     String name;
 
-    @OneToMany(cascade= CascadeType.ALL)
-    @JoinColumn(name= "id_user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     List<Post> posts;
 }

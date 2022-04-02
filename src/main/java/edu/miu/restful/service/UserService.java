@@ -10,9 +10,14 @@ public interface UserService {
 
     List<UserDto> findAll();
     UserDto getUserById(long id);
-    List<PostDto> getPostsOfUserById(long id);
+    Users getUserAllDataById(long id);
+     List<PostDto> getPostsOfUserById(long id);
     void save(Users user);
     void delete(long id);
     void update(int id, UserDto p);
-    List<Users> findUserHaveMoreOnePosts();
+    List<Users> findUserHaveMoreNPosts(int postN);
+
+    List<UserDto> findUserByPostTitle(String title);
+
+    PostDto getPostByIdByUserId(int postId);
 }

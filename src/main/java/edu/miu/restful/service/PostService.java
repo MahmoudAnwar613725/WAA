@@ -5,7 +5,7 @@ import edu.miu.restful.entity.dto.PostDto;
 
 import java.util.List;
 
-public interface PostService {
+public interface PostService  {
 
     void save(Post p);
 
@@ -18,4 +18,9 @@ public interface PostService {
     void update(int id,Post p);
 
     List<PostDto> findEqualToAuthorName(String author);
+    List<PostDto> findEqualToTitle(String title);
+
+    void save(int user_id, Post comment);
+
+    PostDto findPostByUserIde(int postId, long userId);
 }

@@ -1,22 +1,31 @@
 package edu.miu.restful.repo;
 
 import edu.miu.restful.entity.Post;
+import edu.miu.restful.entity.Users;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface PostRepo {
-
-    public List<Post> findAll();
-    public List<Post> findAll(String author);
-
-    public Post getById(int id);
-
-    public void save(Post p);
-
-    public void delete(int id);
-
-    public void update(int id, Post p);
+@Repository
+public interface PostRepo extends CrudRepository<Post,Integer> {
 
 
-    List<Post> getAll();
+    List<Post> findAll();
+
+
+    Post findById(int id);
+
+
+
+    @Query("SELECT  p FROM Post p WHERE p.author=:author")
+    List<Post> findPostsByAuthor(String author);
+
+    @Query("SELECT  p FROM Post p WHERE p.title =:title")
+    List<Post> findPostsByTitle(String title);
+
+    @Query("SELECT p FROM Post p ,Users u where p.id=:postId and u.id=:userId")
+    Post findPostByUserId(int postId,long userId);
+
 }
