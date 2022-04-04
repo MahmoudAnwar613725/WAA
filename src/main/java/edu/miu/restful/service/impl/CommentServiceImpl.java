@@ -29,11 +29,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment findCommentByPostIdByUserId(int postId, long userId, int commentId) {
-        return commentRepo.findCommentByPostIdByUserId(postId, userId, commentId);
+        return commentRepo.findCommentByPostIdByUserId(commentId);
     }
 
     @Override
     public List<Comment> findCommentsByPostIdByUserId(int postId, long userId) {
-        return commentRepo.findCommentsByPostIdByUserId(postId, userId);
+        return commentRepo.findCommentsByPostIdByUserId(postId);
     }
 }
