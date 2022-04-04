@@ -1,5 +1,6 @@
 package edu.miu.restful.controller;
 
+import edu.miu.restful.aspect.annotation.ExecutionTime;
 import edu.miu.restful.entity.Comment;
 import edu.miu.restful.entity.Users;
 import edu.miu.restful.entity.dto.PostDto;
@@ -30,12 +31,12 @@ public class UserController {
     CommentService commentService;
 
     @GetMapping
-    public List<UserDto> getUsers(){
+    public List<UserDto> getUsers() {
         return userService.findAll();
     }
 
     @GetMapping("/filterPosts/{postNum}")
-    public List<Users> getUsersHaveMoreNPost(@PathVariable int postNum){
+    public List<Users> getUsersHaveMoreNPost(@PathVariable int postNum) {
         return userService.findUserHaveMoreNPosts(postNum);
     }
 
@@ -45,10 +46,17 @@ public class UserController {
         return ResponseEntity.ok(user);
     }*/
 
+    @ExecutionTime
     @GetMapping("/{id}")
     public Users getUsers(@PathVariable long id) {
         var user = userService.getUserAllDataById(id);
         return user;
+    }
+
+    @ExecutionTime
+    @GetMapping("/test")
+    public void testException() {
+        int x = 5 / 0;
     }
 
 
@@ -83,7 +91,7 @@ public class UserController {
 
     @GetMapping("/{id}/posts/{post_id}")
     public ResponseEntity<PostDto> getPostByUserId(@PathVariable("id") long userId, @PathVariable("post_id") int postId) {
-        var post = postService.findPostByUserIde(postId,userId);
+        var post = postService.findPostByUserIde(postId, userId);
         return ResponseEntity.ok(post);
     }
 
@@ -96,7 +104,7 @@ public class UserController {
 
     @GetMapping("/{id}/posts/{post_id}/comments")
     public List<Comment> getCommentsByPostIdByUserId(@PathVariable("id") long userId,
-                                                  @PathVariable("post_id") int postId) {
+                                                     @PathVariable("post_id") int postId) {
         return commentService.findCommentsByPostIdByUserId(postId, userId);
     }
 }

@@ -1,8 +1,9 @@
 package edu.miu.restful.aspect;
 
-  import edu.miu.restful.entity.Logger;
-  import edu.miu.restful.service.LogerService;
-  import org.aspectj.lang.ProceedingJoinPoint;
+import edu.miu.restful.entity.Logger;
+import edu.miu.restful.entity.Users;
+import edu.miu.restful.service.LogerService;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -16,10 +17,12 @@ import java.util.Date;
 public class LoggerAspect {
     @Autowired
     LogerService logerService;
-    @Pointcut("@annotation(miu.edu.demo.aspect.annotation.ExecutionTime)")
-    public void logOperation(){
+
+    @Pointcut("@annotation(edu.miu.restful.aspect.annotation.ExecutionTime)")
+    public void logOperation() {
 
     }
+
     @Around("logOperation()")
     public void logOperation(ProceedingJoinPoint joinPoint) throws Throwable {// C P
         long start = System.currentTimeMillis();
@@ -27,15 +30,12 @@ public class LoggerAspect {
         long executionTime = System.currentTimeMillis() - start;
         Logger loger = new Logger();
         loger.setOperation(joinPoint.getSignature().getName());
-        loger.setDate(new Date());
-        loger.setTime(executionTime);
-        loger.setPrinciple(1);
+        loger.setDatetime(new Date());
+        loger.setDuration(executionTime);
+        loger.setPrinciple(Users.getLoggedInUser());
         logerService.save(loger);
 
     }
-
-
-
 
 
 }

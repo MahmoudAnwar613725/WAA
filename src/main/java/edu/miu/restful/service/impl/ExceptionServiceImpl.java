@@ -1,8 +1,9 @@
 package edu.miu.restful.service.impl;
 
-import miu.edu.demo.repo.ExceptionAspectRepo;
-import miu.edu.demo.service.ExceptionService;
-import org.springframework.beans.factory.annotation.Autowired;
+ import edu.miu.restful.entity.Exception;
+ import edu.miu.restful.repo.ExceptionAspectRepo;
+ import edu.miu.restful.service.ExceptionService;
+ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

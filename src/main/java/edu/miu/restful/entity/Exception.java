@@ -3,10 +3,7 @@ package edu.miu.restful.entity;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
@@ -19,7 +16,10 @@ public class Exception {
     long transaction;
     Date date;
     Time time;
-    int principle;
+    @ManyToOne
+    @JoinColumn(name = "principle_id")
+    Users principle;
+
     String operation;
     String exception;
 

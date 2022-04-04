@@ -13,10 +13,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Users {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +27,14 @@ public class Users {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     List<Post> posts;
+
+    @OneToMany(mappedBy = "principle", cascade = CascadeType.ALL)
+     List<Exception> exceptions;
+
+    @OneToMany(mappedBy = "principle", cascade = CascadeType.ALL)
+     List<Logger> logList;
+
+    public  static Users getLoggedInUser(){
+        return new Users(1,"logged in",null,null,null);
+    }
 }

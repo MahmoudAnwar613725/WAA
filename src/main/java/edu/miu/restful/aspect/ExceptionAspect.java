@@ -1,7 +1,9 @@
 package edu.miu.restful.aspect;
 
 
-import miu.edu.demo.service.ExceptionService;
+import edu.miu.restful.entity.Exception;
+import edu.miu.restful.entity.Users;
+import edu.miu.restful.service.ExceptionService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,14 +20,16 @@ import java.util.Date;
 public class ExceptionAspect {
     @Autowired
     ExceptionService exceptionService;
-   // @Pointcut("execution(* *.*.*.*(..))")
-    @Pointcut("execution(* miu.edu.demo.*.*.*(..))")
-    public void Exception(){
+
+    // @Pointcut("execution(* *.*.*.*(..))")
+    @Pointcut("execution(* edu.miu.restful.*.*.*(..))")
+    public void Exception() {
 
 
     }
+
     @AfterThrowing(value = "Exception()", throwing = "e")
-    public void logException(JoinPoint joinPoint,Throwable e){
+    public void logException(JoinPoint joinPoint, Throwable e) {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalTime now = LocalTime.now();
 
@@ -34,8 +38,8 @@ public class ExceptionAspect {
         exception.setOperation(joinPoint.getSignature().getName());
         exception.setDate(new Date());
         exception.setTime(Time.valueOf(now));
-        exception.setPrinciple(1);
-        exception.setException(e.getLocalizedMessage());
+        exception.setPrinciple(Users.getLoggedInUser());
+        exception.setException(e.getMessage());
         exceptionService.save(exception);
 
     }
