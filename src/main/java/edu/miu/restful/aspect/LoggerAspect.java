@@ -24,9 +24,8 @@ public class LoggerAspect {
     }
 
     @Around("logOperation()")
-    public void logOperation(ProceedingJoinPoint joinPoint) throws Throwable {// C P
+    public Object logOperation(ProceedingJoinPoint joinPoint) throws Throwable {// C P
         long start = System.currentTimeMillis();
-        Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
         Logger loger = new Logger();
         loger.setOperation(joinPoint.getSignature().getName());
@@ -34,6 +33,8 @@ public class LoggerAspect {
         loger.setDuration(executionTime);
         loger.setPrinciple(Users.getLoggedInUser());
         logerService.save(loger);
+        return joinPoint.proceed();
+
 
     }
 

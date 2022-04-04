@@ -29,10 +29,12 @@ public class Users {
     List<Post> posts;
 
     @OneToMany(mappedBy = "principle", cascade = CascadeType.ALL)
-     List<Exception> exceptions;
+    @JsonManagedReference
+    List<Exception> exceptions;
 
     @OneToMany(mappedBy = "principle", cascade = CascadeType.ALL)
-     List<Logger> logList;
+    @JsonManagedReference
+    List<Logger> logList;
 
     public  static Users getLoggedInUser(){
         return new Users(1,"logged in",null,null,null);
