@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void save(int userId, Post p) {
-        Users user = userRepo.findById(Long.valueOf(userId)).orElse(null);
+        Users user = userRepo.findById(Long.valueOf(userId)).get();
         if (user != null) {
             p.setUser(user);
             postsRepo.save(p);

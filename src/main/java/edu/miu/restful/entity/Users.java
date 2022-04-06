@@ -24,7 +24,7 @@ public class Users {
     long id;
     String name;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonManagedReference
     List<Post> posts;
 

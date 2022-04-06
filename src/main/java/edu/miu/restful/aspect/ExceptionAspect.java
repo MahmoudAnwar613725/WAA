@@ -28,7 +28,7 @@ public class ExceptionAspect {
 
     }
 
-    @AfterThrowing(value = "Exception()", throwing = "e")
+    /*@AfterThrowing(value = "Exception()", throwing = "e")
     public void logException(JoinPoint joinPoint, Throwable e) {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalTime now = LocalTime.now();
@@ -42,5 +42,5 @@ public class ExceptionAspect {
         exception.setException(e.getMessage());
         exceptionService.save(exception);
 
-    }
+    }*/
 }
