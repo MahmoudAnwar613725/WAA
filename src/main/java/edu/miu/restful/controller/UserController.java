@@ -2,7 +2,7 @@ package edu.miu.restful.controller;
 
 import edu.miu.restful.aspect.annotation.ExecutionTime;
 import edu.miu.restful.entity.Comment;
-import edu.miu.restful.entity.Users;
+import edu.miu.restful.entity.User;
 import edu.miu.restful.entity.dto.PostDto;
 import edu.miu.restful.entity.dto.UserDto;
 import edu.miu.restful.service.CommentService;
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/filterPosts/{postNum}")
-    public List<Users> getUsersHaveMoreNPost(@PathVariable int postNum) {
+    public List<User> getUsersHaveMoreNPost(@PathVariable int postNum) {
         return userService.findUserHaveMoreNPosts(postNum);
     }
 
@@ -48,7 +48,7 @@ public class UserController {
 
     @ExecutionTime
     @GetMapping("/{id}")
-    public Users getUsers(@PathVariable long id) {
+    public User getUsers(@PathVariable long id) {
         var user = userService.getUserAllDataById(id);
         return user;
     }
@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @PostMapping
-    public void save(@RequestBody Users user) {
+    public void save(@RequestBody User user) {
         userService.save(user);
     }
 

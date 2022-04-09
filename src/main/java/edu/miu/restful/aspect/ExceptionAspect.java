@@ -1,19 +1,11 @@
 package edu.miu.restful.aspect;
 
 
-import edu.miu.restful.entity.Exception;
-import edu.miu.restful.entity.Users;
 import edu.miu.restful.service.ExceptionService;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.sql.Time;
-import java.time.LocalTime;
-import java.util.Date;
 
 @Aspect
 @Component

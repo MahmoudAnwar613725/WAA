@@ -1,6 +1,5 @@
 package edu.miu.restful.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,13 +15,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Users {
-
-
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
+    private String email;
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable
+    private List<Role> roles;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonManagedReference
@@ -36,7 +40,7 @@ public class Users {
     @JsonManagedReference
     List<Logger> logList;
 
-    public  static Users getLoggedInUser(){
-        return new Users(1,"logged in",null,null,null);
+    public  static User getLoggedInUser(){
+        return new User(1,"","","logged in",null,null,null,null);
     }
 }

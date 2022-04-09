@@ -1,13 +1,13 @@
 package edu.miu.restful.service.impl;
 
 import edu.miu.restful.entity.Post;
-import edu.miu.restful.entity.Users;
+import edu.miu.restful.entity.User;
 import edu.miu.restful.entity.dto.PostDto;
 import edu.miu.restful.entity.dto.UserDto;
-import edu.miu.restful.helper.ListMapper;
 import edu.miu.restful.repo.UserRepo;
 import edu.miu.restful.service.PostService;
 import edu.miu.restful.service.UserService;
+import edu.miu.restful.util.ListMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
     ModelMapper modelMapper;
 
     @Autowired
-    ListMapper<Users, UserDto> listMapperUser2Dto;
+    ListMapper<User, UserDto> listMapperUser2Dto;
     @Autowired
     ListMapper<Post, PostDto> listMapperPost2Dto;
 
     @Override
     public List<UserDto> findAll() {
-        return (List<UserDto>) listMapperUser2Dto.mapList((List<Users>) userRepo.findAll(), new UserDto());
+        return (List<UserDto>) listMapperUser2Dto.mapList((List<User>) userRepo.findAll(), new UserDto());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Users getUserAllDataById(long id) {
+    public User getUserAllDataById(long id) {
         return userRepo.findById(id).orElse(null);
     }
 
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void save(Users user) {
+    public void save(User user) {
         userRepo.save(user);
     }
 
@@ -65,11 +65,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(int id, UserDto userDto) {
-        userRepo.save(modelMapper.map(userDto, Users.class));
+        userRepo.save(modelMapper.map(userDto, User.class));
     }
 
     @Override
-    public List<Users> findUserHaveMoreNPosts(int postNum) {
+    public List<User> findUserHaveMoreNPosts(int postNum) {
         return userRepo.findGreaterThanNpost(postNum);
     }
 
