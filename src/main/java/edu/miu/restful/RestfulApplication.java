@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -41,9 +42,11 @@ public class RestfulApplication implements CommandLineRunner {
 		roleRepo.save(role1);roleRepo.save(role2);
 
 		List<Role> rolesList = new ArrayList<>();
-		rolesList.add(role1);
+		rolesList.add(role2);
 
- 		Users userData = new Users(1,"test","email",passwordEncoder.encode("123"),rolesList,null,null,null );
+ 		Users userData = new Users(1,"admin","email",passwordEncoder.encode("123"),rolesList,null,null,null );
+ 		Users userAdmin = new Users(2,"test","email",passwordEncoder.encode("123"),new ArrayList<>(Arrays.asList(role1)),null,null,null );
 		userRepo.save(userData);
+		userRepo.save(userAdmin);
 	}
 }

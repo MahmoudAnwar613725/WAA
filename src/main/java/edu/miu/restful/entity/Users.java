@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,13 +27,15 @@ public class Users {
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinTable
     private List<Role> roles;
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonManagedReference
+    @Fetch(FetchMode.SELECT)
     List<Post> posts;
 
     @OneToMany(mappedBy = "principle", cascade = CascadeType.ALL)

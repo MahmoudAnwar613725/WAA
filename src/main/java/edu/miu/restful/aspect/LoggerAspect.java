@@ -31,7 +31,7 @@ public class LoggerAspect {
         loger.setOperation(joinPoint.getSignature().getName());
         loger.setDatetime(new Date());
         loger.setDuration(executionTime);
-        loger.setPrinciple(Users.getLoggedInUser());
+     //   loger.setPrinciple(Users.getLoggedInUser());
         logerService.save(loger);
         return joinPoint.proceed();
 
