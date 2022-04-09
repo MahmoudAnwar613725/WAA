@@ -1,7 +1,6 @@
 package edu.miu.restful.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +20,7 @@ public class Logger {
     @ManyToOne
     @JoinColumn(name = "principle_id")
     @JsonBackReference
-    Users principle;
+    User principle;
     String operation;
 
 }
