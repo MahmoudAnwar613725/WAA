@@ -24,7 +24,7 @@ public interface PostRepo extends CrudRepository<Post,Integer> {
     @Query("SELECT  p FROM Post p WHERE p.title =:title")
     List<Post> findPostsByTitle(String title);
 
-    @Query("SELECT p FROM Post p ,User u where p.id=:postId and u.id=:userId")
+    @Query("SELECT p FROM Post p ,Users u where p.id=:postId and u.id=:userId")
     Post findPostByUserId(int postId,long userId);
 
 }

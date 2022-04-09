@@ -1,6 +1,6 @@
 package edu.miu.restful.service;
 
-import edu.miu.restful.entity.User;
+import edu.miu.restful.entity.Users;
 import edu.miu.restful.entity.dto.PostDto;
 import edu.miu.restful.entity.dto.UserDto;
 
@@ -10,12 +10,12 @@ public interface UserService {
 
     List<UserDto> findAll();
     UserDto getUserById(long id);
-    User getUserAllDataById(long id);
+    Users getUserAllDataById(long id);
      List<PostDto> getPostsOfUserById(long id);
-    void save(User user);
+    void save(Users user);
     void delete(long id);
     void update(int id, UserDto p);
-    List<User> findUserHaveMoreNPosts(int postN);
+    List<Users> findUserHaveMoreNPosts(int postN);
 
     List<UserDto> findUserByPostTitle(String title);
 

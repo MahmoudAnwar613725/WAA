@@ -2,7 +2,7 @@ package edu.miu.restful.service.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.miu.restful.entity.Role;
-import edu.miu.restful.entity.User;
+import edu.miu.restful.entity.Users;
   import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +20,7 @@ public class AwesomeUserDetails implements UserDetails {
 
     private List<Role> roles;
 
-    public AwesomeUserDetails(User user) {
+    public AwesomeUserDetails(Users user) {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.roles = user.getRoles();

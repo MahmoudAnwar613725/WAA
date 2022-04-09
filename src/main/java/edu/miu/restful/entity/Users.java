@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
@@ -40,7 +40,7 @@ public class User {
     @JsonManagedReference
     List<Logger> logList;
 
-    public  static User getLoggedInUser(){
-        return new User(1,"","","logged in",null,null,null,null);
+    public  static Users getLoggedInUser(){
+        return new Users(1,"","","logged in",null,null,null,null);
     }
 }

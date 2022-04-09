@@ -1,7 +1,7 @@
 package edu.miu.restful.aspect;
 
 import edu.miu.restful.entity.Logger;
-import edu.miu.restful.entity.User;
+import edu.miu.restful.entity.Users;
 import edu.miu.restful.service.LogerService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -31,7 +31,7 @@ public class LoggerAspect {
         loger.setOperation(joinPoint.getSignature().getName());
         loger.setDatetime(new Date());
         loger.setDuration(executionTime);
-        loger.setPrinciple(User.getLoggedInUser());
+        loger.setPrinciple(Users.getLoggedInUser());
         logerService.save(loger);
         return joinPoint.proceed();
 

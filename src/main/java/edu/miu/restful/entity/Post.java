@@ -21,6 +21,6 @@ public class Post {
     List<Comment> commentList;
     @ManyToOne
     @JsonBackReference
-    User user;
+    Users user;
 
 }

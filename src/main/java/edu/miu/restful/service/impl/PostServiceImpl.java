@@ -1,7 +1,7 @@
 package edu.miu.restful.service.impl;
 
 import edu.miu.restful.entity.Post;
-import edu.miu.restful.entity.User;
+import edu.miu.restful.entity.Users;
 import edu.miu.restful.entity.dto.PostDto;
 import edu.miu.restful.repo.PostRepo;
 import edu.miu.restful.repo.UserRepo;
@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void save(int userId, Post p) {
-        User user = userRepo.findById(Long.valueOf(userId)).get();
+        Users user = userRepo.findById(Long.valueOf(userId)).get();
         if (user != null) {
             p.setUser(user);
             postsRepo.save(p);

@@ -1,7 +1,7 @@
 package edu.miu.restful.service.impl;
 
 import edu.miu.restful.entity.Post;
-import edu.miu.restful.entity.User;
+import edu.miu.restful.entity.Users;
 import edu.miu.restful.entity.dto.PostDto;
 import edu.miu.restful.entity.dto.UserDto;
 import edu.miu.restful.repo.UserRepo;
@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
     ModelMapper modelMapper;
 
     @Autowired
-    ListMapper<User, UserDto> listMapperUser2Dto;
+    ListMapper<Users, UserDto> listMapperUser2Dto;
     @Autowired
     ListMapper<Post, PostDto> listMapperPost2Dto;
 
     @Override
     public List<UserDto> findAll() {
-        return (List<UserDto>) listMapperUser2Dto.mapList((List<User>) userRepo.findAll(), new UserDto());
+        return (List<UserDto>) listMapperUser2Dto.mapList((List<Users>) userRepo.findAll(), new UserDto());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserAllDataById(long id) {
+    public Users getUserAllDataById(long id) {
         return userRepo.findById(id).orElse(null);
     }
 
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void save(User user) {
+    public void save(Users user) {
         userRepo.save(user);
     }
 
@@ -65,11 +65,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(int id, UserDto userDto) {
-        userRepo.save(modelMapper.map(userDto, User.class));
+        userRepo.save(modelMapper.map(userDto, Users.class));
     }
 
     @Override
-    public List<User> findUserHaveMoreNPosts(int postNum) {
+    public List<Users> findUserHaveMoreNPosts(int postNum) {
         return userRepo.findGreaterThanNpost(postNum);
     }
 

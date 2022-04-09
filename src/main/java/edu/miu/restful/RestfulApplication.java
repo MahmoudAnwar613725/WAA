@@ -1,7 +1,7 @@
 package edu.miu.restful;
 
 import edu.miu.restful.entity.Role;
-import edu.miu.restful.entity.User;
+import edu.miu.restful.entity.Users;
 import edu.miu.restful.repo.RoleRepo;
 import edu.miu.restful.repo.UserRepo;
 import org.modelmapper.ModelMapper;
@@ -43,7 +43,7 @@ public class RestfulApplication implements CommandLineRunner {
 		List<Role> rolesList = new ArrayList<>();
 		rolesList.add(role1);
 
- 		User userData = new User(1,"test","email",passwordEncoder.encode("123"),rolesList,null,null,null );
+ 		Users userData = new Users(1,"test","email",passwordEncoder.encode("123"),rolesList,null,null,null );
 		userRepo.save(userData);
 	}
 }

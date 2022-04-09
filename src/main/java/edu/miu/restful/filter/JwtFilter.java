@@ -2,7 +2,8 @@ package edu.miu.restful.filter;
 
 import edu.miu.restful.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
- import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -18,8 +19,9 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
+    @Autowired
     private final JwtUtil jwtHelper;
-
+    @Autowired
     private final UserDetailsService userDetailsService;
 
     public JwtFilter(JwtUtil jwtHelper, UserDetailsService userDetailsService) {

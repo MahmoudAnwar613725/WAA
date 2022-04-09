@@ -12,10 +12,10 @@ import java.util.List;
  public interface CommentRepo extends CrudRepository<Comment,Integer>  {
 
 
-  @Query("SELECT c from Comment c , Post p,User u where p.id=:postId and u.id=:userId and c.id=:commentId")
+  @Query("SELECT c from Comment c , Post p,Users u where p.id=:postId and u.id=:userId and c.id=:commentId")
   Comment findCommentByPostIdByUserId(int postId, long userId, int commentId);
 
-  @Query("SELECT c from Comment c , Post p,User u where p.id=:postId and u.id=:userId and c.post.id=p.id")
+  @Query("SELECT c from Comment c , Post p,Users u where p.id=:postId and u.id=:userId and c.post.id=p.id")
   List<Comment> findCommentsByPostIdByUserId(int postId, long userId);
 
 
