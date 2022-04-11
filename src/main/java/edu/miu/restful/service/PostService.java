@@ -20,7 +20,7 @@ public interface PostService  {
     List<PostDto> findEqualToAuthorName(String author);
     List<PostDto> findEqualToTitle(String title);
 
-    void save(int user_id, Post comment);
+    void save(long user_id, Post comment);
 
     PostDto findPostByUserIde(int postId, long userId);
 }

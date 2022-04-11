@@ -2,12 +2,18 @@ package edu.miu.restful.controller;
 
 import edu.miu.restful.entity.Comment;
 import edu.miu.restful.entity.Post;
+import edu.miu.restful.entity.Users;
 import edu.miu.restful.entity.dto.PostDto;
+import edu.miu.restful.repo.UserRepo;
 import edu.miu.restful.service.CommentService;
 import edu.miu.restful.service.PostService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.attribute.UserPrincipal;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -17,6 +23,7 @@ public class PostController {
 
     PostService postService;
     CommentService commentService;
+    UserRepo userRepo;
 
     public PostController(PostService postService) {
         this.postService = postService;
@@ -71,8 +78,17 @@ public class PostController {
     @PostMapping("/users/{user_id}/posts")
     public void savePost(
             @PathVariable int user_id,
-            @RequestBody  Post comment){
-        postService.save(user_id,comment);
+            @RequestBody Post comment) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        Users user = userRepo.findByEmail(username);
+        postService.save(user.getId(), comment);
     }
 
 }

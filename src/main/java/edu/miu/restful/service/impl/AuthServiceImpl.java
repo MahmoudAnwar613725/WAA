@@ -2,6 +2,7 @@ package edu.miu.restful.service.impl;
 
 
 import edu.miu.restful.entity.dto.request.LoginRequest;
+import edu.miu.restful.entity.dto.request.RefreshTokenRequest;
 import edu.miu.restful.entity.dto.response.LoginResponse;
 import edu.miu.restful.service.AuthService;
 import edu.miu.restful.util.JwtUtil;
@@ -47,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
-    /*@Override
+     @Override
     public LoginResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
         boolean isRefreshTokenValid = jwtUtil.validateToken(refreshTokenRequest.getRefreshToken());
         if (isRefreshTokenValid) {
@@ -56,5 +57,5 @@ public class AuthServiceImpl implements AuthService {
             return loginResponse;
         }
         return new LoginResponse();
-    }*/
+    }
 }

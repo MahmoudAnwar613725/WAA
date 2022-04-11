@@ -10,6 +10,8 @@ import edu.miu.restful.util.ListMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,9 +35,17 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void save(int userId, Post p) {
-        Users user = userRepo.findById(Long.valueOf(userId)).get();
-        if (user != null) {
+    public void save(long userId, Post p) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        Users user = userRepo.findByEmail(username);
+         if (user != null) {
             p.setUser(user);
             postsRepo.save(p);
         }
