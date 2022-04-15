@@ -5,6 +5,7 @@ import edu.miu.restful.entity.Post;
 import edu.miu.restful.entity.dto.PostDto;
 import edu.miu.restful.service.CommentService;
 import edu.miu.restful.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,14 +14,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
+@CrossOrigin()
 public class PostController {
 
+    @Autowired
     PostService postService;
+    @Autowired
     CommentService commentService;
 
     public PostController(PostService postService) {
         this.postService = postService;
     }
+/*
 
     @GetMapping(headers = "X-API-VERSION=1")
     public List<PostDto> getAllV1() {
@@ -31,6 +36,13 @@ public class PostController {
     public List<PostDto> getAllV2() {
         return postService.getAll();
     }
+*/
+
+    @GetMapping
+    public List<PostDto> getAll() {
+        return postService.getAll();
+    }
+
 
     @GetMapping("/{id}")
     public PostDto getById(@PathVariable() int id) {
@@ -75,4 +87,12 @@ public class PostController {
         postService.save(user_id,comment);
     }
 
+    @GetMapping("/{postId}/comments")
+    public List<Comment> getCommentsByPostIdByUserId(@PathVariable int postId) {
+        return commentService.findCommentsByPostId(postId);
+    }
+
+
 }
+
+

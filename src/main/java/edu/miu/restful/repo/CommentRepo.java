@@ -18,5 +18,8 @@ import java.util.List;
   @Query("SELECT c from Comment c , Post p,Users u where p.id=:postId and u.id=:userId and c.post.id=p.id")
   List<Comment> findCommentsByPostIdByUserId(int postId, long userId);
 
+ @Query("SELECT c from Comment c , Post p,Users u where p.id=:postId and c.post.id=p.id")
+ List<Comment> findCommentsByPostIdBy(int postId);
 
- }
+
+}

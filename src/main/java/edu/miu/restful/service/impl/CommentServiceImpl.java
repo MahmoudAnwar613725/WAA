@@ -36,4 +36,9 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> findCommentsByPostIdByUserId(int postId, long userId) {
         return commentRepo.findCommentsByPostIdByUserId(postId, userId);
     }
+
+    @Override
+    public List<Comment> findCommentsByPostId(int postId) {
+        return commentRepo.findCommentsByPostIdBy(postId);
+    }
 }
